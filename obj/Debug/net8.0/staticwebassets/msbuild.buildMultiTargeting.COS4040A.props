@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\COS4040A.props" />
+</Project>
