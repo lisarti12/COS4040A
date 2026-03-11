@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("COS4040A")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7e96057f13fc6d412110d71fb7f8d44573e9767c")]
 [assembly: System.Reflection.AssemblyProductAttribute("COS4040A")]
 [assembly: System.Reflection.AssemblyTitleAttribute("COS4040A")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
