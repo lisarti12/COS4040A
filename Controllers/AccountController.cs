@@ -60,5 +60,39 @@ namespace COS4040A.Controllers
             var hash = sha256.ComputeHash(bytes);
             return Convert.ToBase64String(hash);
         }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(LoginViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email);
+            if (user == null || user.PasswordHash != HashPassword(model.Password))
+            {
+                ModelState.AddModelError(string.Empty, "Invalid email or password.");
+                return View();
+            }
+
+            
+            HttpContext.Session.SetString("UserEmail", user.Email);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("UserEmail");
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

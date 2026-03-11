@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11520.95 d18.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "COS4040A", "COS4040A.csproj", "{DFD0405F-FB1C-4C41-0A85-2BA1BE128C3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFD0405F-FB1C-4C41-0A85-2BA1BE128C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DFD0405F-FB1C-4C41-0A85-2BA1BE128C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DFD0405F-FB1C-4C41-0A85-2BA1BE128C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DFD0405F-FB1C-4C41-0A85-2BA1BE128C3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA69B2F4-6F6F-42D5-A08A-CA569B261EF7}
+	EndGlobalSection
+EndGlobal
