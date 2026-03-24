@@ -1,7 +1,54 @@
-﻿@{
+﻿@model COS4040A.ViewModels.HomeIndexViewModel
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
+<div class="text-center mb-4">
     <h1>Welcome to e-Project</h1>
 </div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<h3>5 Most Recently Completed Projects</h3>
+
+@if (Model.RecentCompletedProjects.Any())
+{
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Programming Language</th>
+                <th>Completed At</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model.RecentCompletedProjects)
+            {
+                <tr>
+                    <td>@project.Title</td>
+                    <td>@project.Author</td>
+                    <td>@project.ProgrammingLanguage</td>
+                    <td>@project.CompletedAt?.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No completed projects found.</p>
+}
