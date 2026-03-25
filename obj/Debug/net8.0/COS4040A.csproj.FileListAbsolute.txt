@@ -138,7 +138,6 @@ C:\Users\janej\COS4040A\obj\Debug\net8.0\refint\COS4040A.dll
 C:\Users\janej\COS4040A\obj\Debug\net8.0\COS4040A.pdb
 C:\Users\janej\COS4040A\obj\Debug\net8.0\COS4040A.genruntimeconfig.cache
 C:\Users\janej\COS4040A\obj\Debug\net8.0\ref\COS4040A.dll
-C:\Users\janej\COS4040A\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\lisar\source\repos\COS4040A\COS4040A\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\lisar\source\repos\COS4040A\COS4040A\bin\Debug\net8.0\appsettings.json
 C:\Users\lisar\source\repos\COS4040A\COS4040A\bin\Debug\net8.0\COS4040A.staticwebassets.runtime.json
@@ -283,3 +282,11 @@ C:\Users\lisar\source\repos\COS4040A\COS4040A\obj\Debug\net8.0\refint\COS4040A.d
 C:\Users\lisar\source\repos\COS4040A\COS4040A\obj\Debug\net8.0\COS4040A.pdb
 C:\Users\lisar\source\repos\COS4040A\COS4040A\obj\Debug\net8.0\COS4040A.genruntimeconfig.cache
 C:\Users\lisar\source\repos\COS4040A\COS4040A\obj\Debug\net8.0\ref\COS4040A.dll
+C:\Users\janej\COS4040A\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\janej\COS4040A\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\janej\COS4040A\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\janej\COS4040A\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\janej\COS4040A\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\janej\COS4040A\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\janej\COS4040A\bin\Debug\net8.0\System.ClientModel.dll
+C:\Users\janej\COS4040A\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
