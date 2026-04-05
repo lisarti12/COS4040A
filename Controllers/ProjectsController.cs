@@ -2,6 +2,7 @@
 using COS4040A.Models;
 using COS4040A.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace COS4040A.Controllers
 {
@@ -65,6 +66,107 @@ namespace COS4040A.Controllers
                 ModelState.AddModelError(string.Empty, "An unexpected error occurred while saving the project.");
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public IActionResult Search()
+        {
+            if (HttpContext.Session.GetString("UserEmail") == null)
+            {
+                TempData["ErrorMessage"] = "You must be logged in to search projects.";
+                return RedirectToAction("Login", "Account");
+            }
+
+            return View(new SearchProjectsViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Search(SearchProjectsViewModel model)
+        {
+            if (HttpContext.Session.GetString("UserEmail") == null)
+            {
+                TempData["ErrorMessage"] = "You must be logged in to search projects.";
+                return RedirectToAction("Login", "Account");
+            }
+
+            model.Results = new List<SearchResultViewModel>();
+
+            if (string.IsNullOrWhiteSpace(model.SearchTerm))
+            {
+                ModelState.AddModelError(string.Empty, "Please enter a search term.");
+                return View(model);
+            }
+
+            string term = model.SearchTerm.Trim();
+
+            var projects = await _context.Projects.ToListAsync();
+
+            var results = projects
+                .Select(p => new SearchResultViewModel
+                {
+                    Project = p,
+                    MatchCount =
+                        CountOccurrences(p.Title, term) +
+                        CountOccurrences(p.Description, term) +
+                        CountOccurrences(p.Author, term) +
+                        CountOccurrences(p.ProgrammingLanguage, term)
+                })
+                .Where(x => x.MatchCount > 0)
+                .OrderByDescending(x => x.MatchCount)
+                .ThenBy(x => x.Project.Title)
+                .ToList();
+
+            model.Results = results;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (HttpContext.Session.GetString("UserEmail") == null)
+            {
+                TempData["ErrorMessage"] = "You must be logged in to delete projects.";
+                return RedirectToAction("Login", "Account");
+            }
+
+            var project = await _context.Projects.FindAsync(id);
+
+            if (project == null)
+            {
+                TempData["ErrorMessage"] = "Project not found.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (project.Status == ProjectStatus.InProgress)
+            {
+                TempData["ErrorMessage"] = "In-progress projects cannot be deleted.";
+                return RedirectToAction("Index", "Home");
+            }
+
+            _context.Projects.Remove(project);
+            await _context.SaveChangesAsync();
+
+            TempData["SuccessMessage"] = $"Project '{project.Title}' was deleted successfully.";
+            return RedirectToAction("Index", "Home");
+        }
+
+        private static int CountOccurrences(string? source, string searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(source) || string.IsNullOrWhiteSpace(searchTerm))
+                return 0;
+
+            int count = 0;
+            int index = 0;
+
+            while ((index = source.IndexOf(searchTerm, index, StringComparison.OrdinalIgnoreCase)) != -1)
+            {
+                count++;
+                index += searchTerm.Length;
+            }
+
+            return count;
         }
     }
 }

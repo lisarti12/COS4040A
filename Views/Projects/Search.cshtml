@@ -1,0 +1,100 @@
+﻿@model COS4040A.ViewModels.SearchProjectsViewModel
+@using COS4040A.Models
+
+@{
+    ViewData["Title"] = "Search Projects";
+    bool isLoggedIn = Context.Session.GetString("UserEmail") != null;
+}
+
+<h2>Search Projects</h2>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+<form asp-action="Search" method="post" class="mb-4">
+    @Html.AntiForgeryToken()
+
+    <div class="mb-3">
+        <label asp-for="SearchTerm" class="form-label"></label>
+        <input asp-for="SearchTerm" class="form-control" />
+        <span asp-validation-for="SearchTerm" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+@if (Model.Results.Any())
+{
+    <h4>Results</h4>
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Programming Language</th>
+                <th>Status</th>
+                <th>Matches</th>
+                @if (isLoggedIn)
+                {
+                    <th>Actions</th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@item.Project.Title</td>
+                    <td>@item.Project.Description</td>
+                    <td>@item.Project.Author</td>
+                    <td>@item.Project.ProgrammingLanguage</td>
+                    <td>@item.Project.Status</td>
+                    <td>@item.MatchCount</td>
+
+                    @if (isLoggedIn)
+                    {
+                        <td>
+                            @if (item.Project.Status == ProjectStatus.Pending || item.Project.Status == ProjectStatus.Complete)
+                            {
+                                <form asp-controller="Projects" asp-action="Delete" method="post" style="display:inline;">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@item.Project.Id" />
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure you want to delete project @item.Project.Title?');">
+                                        Delete
+                                    </button>
+                                </form>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else if (!string.IsNullOrWhiteSpace(Model.SearchTerm))
+{
+    <p>No projects matched your search.</p>
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

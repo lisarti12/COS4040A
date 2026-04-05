@@ -4007,24 +4007,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\janej\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\lisar\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\janej\\COS4040A\\COS4040A.csproj",
+      "projectUniqueName": "C:\\Users\\lisar\\source\\repos\\COS4040A\\COS4040A\\COS4040A.csproj",
       "projectName": "COS4040A",
-      "projectPath": "C:\\Users\\janej\\COS4040A\\COS4040A.csproj",
-      "packagesPath": "C:\\Users\\janej\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\janej\\COS4040A\\obj\\",
+      "projectPath": "C:\\Users\\lisar\\source\\repos\\COS4040A\\COS4040A\\COS4040A.csproj",
+      "packagesPath": "C:\\Users\\lisar\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lisar\\source\\repos\\COS4040A\\COS4040A\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\janej\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\lisar\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4032,6 +4027,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4049,8 +4045,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "10.0.100"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -4096,7 +4091,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

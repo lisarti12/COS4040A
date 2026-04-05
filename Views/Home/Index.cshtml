@@ -1,58 +1,82 @@
 ﻿@model COS4040A.ViewModels.HomeIndexViewModel
+@using COS4040A.Models
 
 @{
     ViewData["Title"] = "Home Page";
+    bool isLoggedIn = Context.Session.GetString("UserEmail") != null;
 }
 
 <div class="text-center mb-4">
-    <h1 class="display-5">Welcome to e-Project</h1>
+    <h1>Welcome to e-Project</h1>
 </div>
 
 @if (TempData["SuccessMessage"] != null)
 {
-    <div class="alert alert-success text-center">
+    <div class="alert alert-success">
         @TempData["SuccessMessage"]
     </div>
 }
 
 @if (TempData["ErrorMessage"] != null)
 {
-    <div class="alert alert-danger text-center">
+    <div class="alert alert-danger">
         @TempData["ErrorMessage"]
     </div>
 }
 
-<div class="mb-3">
-    <h3 class="text-center">5 Most Recently Completed Projects</h3>
-</div>
+<h3>5 Most Recently Completed Projects</h3>
 
 @if (Model.RecentCompletedProjects.Any())
 {
-    <div class="table-responsive">
-        <table class="table table-bordered table-striped table-hover align-middle">
-            <thead class="table-dark">
-                <tr>
-                    <th>Title</th>
-                    <th>Author</th>
-                    <th>Language</th>
-                    <th>Completed</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var project in Model.RecentCompletedProjects)
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Author</th>
+                <th>Programming Language</th>
+                <th>Status</th>
+                <th>Completed At</th>
+                @if (isLoggedIn)
                 {
-                    <tr>
-                        <td>@project.Title</td>
-                        <td>@project.Author</td>
-                        <td>@project.ProgrammingLanguage</td>
-                        <td>@project.CompletedAt?.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
-                    </tr>
+                    <th>Actions</th>
                 }
-            </tbody>
-        </table>
-    </div>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model.RecentCompletedProjects)
+            {
+                <tr>
+                    <td>@project.Title</td>
+                    <td>@project.Description</td>
+                    <td>@project.Author</td>
+                    <td>@project.ProgrammingLanguage</td>
+                    <td>@project.Status</td>
+                    <td>@project.CompletedAt?.ToLocalTime().ToString("yyyy-MM-dd HH:mm")</td>
+
+                    @if (isLoggedIn)
+                    {
+                        <td>
+                            @if (project.Status == ProjectStatus.Pending || project.Status == ProjectStatus.Complete)
+                            {
+                                <form asp-controller="Projects" asp-action="Delete" method="post" style="display:inline;">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="id" value="@project.Id" />
+                                    <button type="submit"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Are you sure you want to delete project @project.Title?');">
+                                        Delete
+                                    </button>
+                                </form>
+                            }
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
 }
 else
 {
-    <p class="text-center">No completed projects found.</p>
+    <p>No completed projects found.</p>
 }
