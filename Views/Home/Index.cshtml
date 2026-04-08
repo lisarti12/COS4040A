@@ -57,6 +57,13 @@
                     @if (isLoggedIn)
                     {
                         <td>
+                            <a asp-controller="Projects"
+                           asp-action="Edit"
+                           asp-route-id="@project.Id"
+                           class="btn btn-warning btn-sm">
+                            Edit
+                            </a>
+                        
                             @if (project.Status == ProjectStatus.Pending || project.Status == ProjectStatus.Complete)
                             {
                                 <form asp-controller="Projects" asp-action="Delete" method="post" style="display:inline;">

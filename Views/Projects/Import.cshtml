@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Import Projects";
+}
+
+<h2>Import Projects</h2>
+
+<p><strong>Expected JSON format:</strong></p>
+
+<pre>
+    [
+    {
+    "title": "Project A",
+    "description": "Some description",
+    "author": "John Doe",
+    "programmingLanguage": "C#",
+    "status": "Pending"
+    }
+    ]
+</pre>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+<form asp-action="Import" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="form-group mb-3">
+        <input type="file" name="file" class="form-control" accept=".json" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>

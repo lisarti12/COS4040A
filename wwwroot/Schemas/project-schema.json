@@ -1,0 +1,29 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": [ "title", "description", "author", "programmingLanguage", "status" ],
+    "properties": {
+      "title": {
+        "type": "string",
+        "maxLength": 150
+      },
+      "description": {
+        "type": "string",
+        "maxLength": 1000
+      },
+      "author": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "programmingLanguage": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "status": {
+        "type": "string",
+        "enum": [ "Pending", "InProgress", "Complete" ]
+      }
+    }
+  }
+}
